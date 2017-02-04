@@ -76,11 +76,9 @@
         <%= submit_tag("検索", :class => "btn btn-success" ) %>
         <% end %>
 
-        <table>
-          <tr>
-            <%= render @drinks %>
-          </tr>
-        </table>
+        <ul>
+          <%= render @drinks %>
+        </ul>
       </div>
     </div>
 
