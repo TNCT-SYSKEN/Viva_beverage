@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <html lang="ja">
   <head>
     <meta charset="utf-8">
@@ -57,9 +55,10 @@
 
         attachMessage(venMarker, "hoge");
       }
-
     }
+
     </script>
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyB3n3YCJPGGDIZ2ybJdls6Xyn_pY2tywUc&callback=initMap"></script>
 
     <a href="#"  data-action="open" data-side="left" class="btn"><img style="position:absolute; top:10px; left:120px; width: 40px; height: 40px;" src="/assets/search.png"></a>
@@ -72,7 +71,7 @@
         <!-- <%= text_field_tag :name, params[:name], :class => "form-control", placeholder: "入力してください" %></p> -->
         <%= text_field_tag :name, @word, placeholder: "例：コカ・コーラ", class: "form-control input-search-word" %></p>
         <label for="name">ジャンル</label>
-        <p/><%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル", :class => "form-control" %></p>
+        <p><%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル", :class => "form-control" %></p>
         <%= submit_tag("検索", :class => "btn btn-success" ) %>
         <% end %>
 
@@ -113,7 +112,7 @@ $(function(){
     $('#drink li').click(function(){
         var index = $(this).index() + 1;
         var text = $(this).text();
-        // alert('要素:' + index + '番目' + text);
+        alert('要素:' + index + '番目' + text);
     });
 });
 </script>
