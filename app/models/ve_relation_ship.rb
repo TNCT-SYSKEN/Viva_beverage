@@ -1,0 +1,2 @@
+class VeRelationShip < ApplicationRecord
+end

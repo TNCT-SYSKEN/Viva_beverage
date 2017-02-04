@@ -1,0 +1,2 @@
+class Vending < ApplicationRecord
+end
