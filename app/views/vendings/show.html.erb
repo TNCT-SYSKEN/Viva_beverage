@@ -18,11 +18,21 @@
 
 
     document.write(vendings.length);
+
+    function attachMessage(marker, msg) {
+      google.maps.event.addListener(marker, 'click', function(event) {
+        new google.maps.InfoWindow({
+          content: '<div class="sample">' + msg + '</div>'
+        }).open(map, marker);
+      });
+    }
+
     function initMap() {
       var opts = {
         zoom: 20,
         center: new google.maps.LatLng(35.700088,139.77236420000003)
       };
+
       var map = new google.maps.Map(document.getElementById("map"), opts);
 
       var usrMarker = new google.maps.Marker( {
@@ -33,32 +43,23 @@
       var usrMarkerInfo = new google.maps.InfoWindow( {
         content: '<div class="sample">現在地</div>'
       } ) ;
+
       usrMarker.addListener('click', function() {
         usrMarkerInfo.open(map, usrMarker);
       } ) ;
 
       var venMarkers = [];
       var venMarkerInfos = [];
+
+
       for(var i=0;i<vendings.length;++i) {
         var venMarker = new google.maps.Marker({
           position: new google.maps.LatLng(vendings[i]["lat"], vendings[i]["lon"]),
           map: map
         });
-        
-        venMarkers.push(venMarker);
 
+        attachMessage(venMarker, "hoge");
 
-        /*
-        venMarkerInfos.push(venMarkerInfo = new google.maps.InfoWindow( {
-          content: '<div class="sample">ほげ</div>'
-        } ) );
-
-        venMarker.addListener('click', function() {
-          new google.maps.InfoWindow( {
-            content: '<div class="sample">ほげ</div>'
-          } ).open(map, venMarker);
-        } ) ;
-        */
       }
 
     }
