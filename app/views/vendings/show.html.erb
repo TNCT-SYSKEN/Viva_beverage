@@ -14,9 +14,20 @@
     var vendings = JSON.parse('<%= raw @vendings.to_json %>');
 
     function attachMessage(marker, msg) {
+      funcAr = msg.split(',');
+      htc = "";
+      for(var n = 0;n < funcAr.length;++n){
+        if(funcAr[n] == "AED"){
+          htc = htc + '<%= image_tag "AED.png", :width => 30, :height => 30 %>';
+        }else if(funcAr[n] == "ゴミ箱"){
+          htc = htc + '<%= image_tag "DustDas.png", :width => 30, :height => 30 %>';
+        }else if(funcAr[n] == "IC"){
+          htc = htc + '<%= image_tag "IC.png", :width => 30, :height => 30 %>';
+        }
+      }
       google.maps.event.addListener(marker, 'click', function(event) {
         new google.maps.InfoWindow({
-          content: '<div class="sample">' + msg + '</div>'
+          content: '<div class="sample">' + htc + '</div>'
         }).open(map, marker);
       });
     }
@@ -51,7 +62,7 @@
           map: map
         });
 
-        attachMessage(venMarker, "hoge");
+        attachMessage(venMarker, vendings[i]["func"]);
       }
     }
 
