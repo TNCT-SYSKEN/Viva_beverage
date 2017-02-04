@@ -16,7 +16,7 @@ body {
     width:200px;
     margin:0 auto;
     position:absolute;
-    top:100px;
+    top:0px;
     left:10px;
 
 }
@@ -29,6 +29,29 @@ body {
      padding: 0px
 }
 #slideBox{
+     padding: 10px;
+     border: 1px #ccc solid;
+     background: #fc6;
+     display:none;
+}
+
+#wrapper2{
+    width:200px;
+    margin:0 auto;
+    position:absolute;
+    top:100px;
+    left:10px;
+
+}
+
+.open2{
+     background: #fc6;
+     color: #fff;
+     cursor: pointer;
+     width:0px;
+     padding: 0px
+}
+#slideBox2{
      padding: 10px;
      border: 1px #ccc solid;
      background: #fc6;
