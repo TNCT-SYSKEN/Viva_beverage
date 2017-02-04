@@ -1,16 +1,7 @@
-<h1>検索結果</h1>
 
-<%= render @drinks %>
-
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <title>検索結果</title>
-  </head>
-  <body>
     <p>地図です。</p>
 
-    <div id="map" style="width:1440px; height:700px"></div>
+    <div id="map" style="width:100%; height:100vh"></div>
 
     <script type="text/javascript">
     var vendings = JSON.parse('<%= raw @vendings.to_json %>');
