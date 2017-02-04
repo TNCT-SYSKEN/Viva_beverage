@@ -14,7 +14,10 @@
 
     <script type="text/javascript">
     var vendings = JSON.parse('<%= raw @vendings.to_json %>');
-    document.write(vendings[0]["lat"]);
+    document.write('<%= raw @vendings.to_json %>');
+
+
+    document.write(vendings.length);
     function initMap() {
       var opts = {
         zoom: 20,
@@ -28,19 +31,25 @@
         position: new google.maps.LatLng(35.700088,139.77236420000003), // 現在地座標
       } ) ;
 
-      var usrmakerinfo = new google.maps.InfoWindow( {
+      var usrmarkerinfo = new google.maps.InfoWindow( {
         content: '<div class="sample">現在地</div>'
       } ) ;
-      usrmaker.addListener('click', function() {
-        usrmakerinfo.open(map, usrmaker);
+      usrmarker.addListener('click', function() {
+        usrmarkerinfo.open(map, usrmarker);
       } ) ;
-      //for(venmakerid = 0; venmakerid < 50; venmakerid++) {    この部分はRailsからの受け取り方によって変動するので後回し
-        //var venmaker [venmakerid] = new google.maps.Marker( VenMakerOptions )
-        //var VenMakerOptions [0] = new google.maps.Maeker( {
-          //map: map ,
-          //position: new google.maps.LatLng() ,
-        //} ) ;
-      //}
+
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(35.700889, 139.771905),
+        map: map
+      });
+
+      for(var i=0;i<vendings.length;++i) {
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(vendings[i]["lat"], vendings[i]["lon"]),
+          map: map
+        });
+      }
+
     }
 
     $(function(){
