@@ -160,11 +160,12 @@ DEPENDENCIES
   listen (= 3.0.8)
   pg (= 0.18.4)
   puma (= 3.4.0)
-  rails (~> 5.0.1)
+  rails (= 5.0.1)
   sass-rails (= 5.0.6)
   spring (= 1.7.2)
   spring-watcher-listen (= 2.0.0)
   turbolinks (= 5.0.1)
+  tzinfo-data
   uglifier (= 3.0.0)
   web-console (= 3.1.1)
 
