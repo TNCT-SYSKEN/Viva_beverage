@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+
+
+
 <h1>検索結果</h1>
 
-
-<p>検索画面</p>
+<%= render @drinks %>
 
 地図
 
@@ -18,6 +20,7 @@
 
 
     <script type="text/javascript">
+    window.alert(gon.vendings.first.id)
     function initMap() {
       var opts = {
         zoom: 20,
@@ -28,8 +31,15 @@
       var usrmarker = new google.maps.Marker( usrMarkerOptions )
       var usrMarkerOptions = new google.maps.Marker( {
         map: map ,	// 地図
-        position: new google.maps.LatLng(35.700088,139.77236420000003) ,	// 位置座標
+        position: new google.maps.LatLng(35.700088,139.77236420000003) ,	// 現在地座標
       } ) ;
+      //for(venmakerid = 0; venmakerid < 50; venmakerid++) {    この部分はRailsからの受け取り方によって変動するので後回し
+        //var venmaker [venmakerid] = new google.maps.Marker( VenMakerOptions )
+        //var VenMakerOptions [0] = new google.maps.Maeker( {
+          //map: map ,
+          //position: new google.maps.LatLng() ,
+        //} ) ;
+      //}
     }
 
     $(function(){
