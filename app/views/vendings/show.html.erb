@@ -1,29 +1,19 @@
 <!DOCTYPE html>
-<!--
-  <div>
-  <%= form_tag('/vendings/show', :method => :get) do %>
-  <%= label_tag 'name' %><%= text_field_tag :name, params[:name] %>
-  <%= label_tag 'genre' %>
-  <%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル" %>
-  <%= submit_tag ['検索'] %>
-  <% end %>
-</div>-->
 
-<!-- <%= render @drinks %> -->
-
+<%= render @drinks %>
 
 <html lang="ja">
   <head>
     <meta charset="utf-8">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-sidebar/3.1.0/jquery.sidebar.min.js"></script>
     <title>検索結果</title>
   </head>
   <body>
-    <p地図です。</p>
-
     <div id="map" style="width:100%; height:100vh"></div>
 
-
     <script type="text/javascript">
+    window.alert(gon.vendings.first.id)
     function initMap() {
       var opts = {
         zoom: 20,
@@ -34,41 +24,48 @@
       var usrmarker = new google.maps.Marker( usrMarkerOptions )
       var usrMarkerOptions = new google.maps.Marker( {
         map: map ,	// 地図
-        position: new google.maps.LatLng(35.700088,139.77236420000003), content:'現在地'	// 現在地座標
+        position: new google.maps.LatLng(35.700088,139.77236420000003) ,	// 位置座標
       } ) ;
-      //for(venmakerid = 0; venmakerid < 50; venmakerid++) {    この部分はRailsからの受け取り方によって変動するので後回し
-        //var venmaker [venmakerid] = new google.maps.Marker( VenMakerOptions )
-        //var VenMakerOptions [0] = new google.maps.Maeker( {
-          //map: map ,
-          //position: new google.maps.LatLng() ,
-        //} ) ;
-      //}
     }
-
-    $(function(){
-     $(".open").click(function(){
-      $("#slideBox").slideToggle("slow");
-     });
-});
     </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyB3n3YCJPGGDIZ2ybJdls6Xyn_pY2tywUc&callback=initMap"></script>
 
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyB3n3YCJPGGDIZ2ybJdls6Xyn_pY2tywUc&callback=initMap">
-    </script>
-    <div id="wrapper">
+    <a href="#" style="position:absolute; top:100px; left:10px" class="btn btn-success" data-action="open" data-side="left"><span>Open Left</span></a>
 
-    <p class="open"><img alt="Rails logo" src="/assets/search.png" /></p>
-    <div id="slideBox">
+    <div class="sidebar left">
       <div>
-      <%= form_tag('/vendings/show', :method => :get) do %>
-      <%= label_tag 'name' %><%= text_field_tag :name, params[:name] %>
-      <%= label_tag 'genre' %>
-      <%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル" %>
-      <%= submit_tag ['検索'] %>
-      <% end %>
+        <%= form_tag('/vendings/show', :method => :get) do %>
+        <%= label_tag 'name' %><%= text_field_tag :name, params[:name] %>
+        <%= label_tag 'genre' %>
+        <%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル" %>
+        <%= submit_tag ['検索'] %>
+        <a href="#" class="btn btn-danger" data-action="close" data-side="left"><span>Close Left</span></a>
+        <% end %>
       </div>
     </div>
 
-    </div><!--wrapper-->
+
   </body>
 </html>
+
+<script>
+$(document).ready(function () {
+    // 向き
+    var sides = ["left", "top", "right", "bottom"];
+
+    // サイドバーの初期化
+    for (var i = 0; i < sides.length; ++i) {
+        var cSide = sides[i];
+        $(".sidebar." + cSide).sidebar({side: cSide});
+    }
+
+    // ボタンのクリックにより...
+    $(".btn[data-action]").on("click", function () {
+        var $this = $(this);
+        var action = $this.attr("data-action");
+        var side = $this.attr("data-side");
+        $(".sidebar." + side).trigger("sidebar:" + action);
+        return false;
+    });
+});
+</script>
