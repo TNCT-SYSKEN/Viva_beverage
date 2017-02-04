@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <h1>検索結果</h1>
 
-  <div>
-  <%= form_tag('/vendings/show', :method => :get) do %>
-  <%= label_tag 'name' %><%= text_field_tag :name, params[:name] %>
-  <%= label_tag 'genre' %>
-  <%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル" %>
-  <%= submit_tag ['検索'] %>
-  <% end %>
-  </div>
 
 <p>検索画面</p>
 
@@ -24,6 +16,7 @@
 
     <div id="map" style="width:1440px; height:700px"></div>
 
+
     <script type="text/javascript">
     function initMap() {
       var opts = {
@@ -38,10 +31,31 @@
         position: new google.maps.LatLng(35.700088,139.77236420000003) ,	// 位置座標
       } ) ;
     }
+
+    $(function(){
+     $(".open").click(function(){
+      $("#slideBox").slideToggle("slow");
+     });
+});
     </script>
 
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyB3n3YCJPGGDIZ2ybJdls6Xyn_pY2tywUc&callback=initMap">
     </script>
+    <div id="wrapper">
+
+    <p class="open"><img alt="Rails logo" src="/assets/search.png" /></p>
+    <div id="slideBox">
+      <div>
+      <%= form_tag('/vendings/show', :method => :get) do %>
+      <%= label_tag 'name' %><%= text_field_tag :name, params[:name] %>
+      <%= label_tag 'genre' %>
+      <%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル" %>
+      <%= submit_tag ['検索'] %>
+      <% end %>
+      </div>
+    </div>
+
+    </div><!--wrapper-->
   </body>
 </html>

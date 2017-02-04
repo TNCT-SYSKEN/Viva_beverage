@@ -6,3 +6,11 @@ GenreList.create(name: "水")
 GenreList.create(name: "果実・野菜ジュース")
 GenreList.create(name: "炭酸ジュース")
 GenreList.create(name: "その他")
+
+Vending.create(lat: 35.700889, lon: 139.771905, func: "ゴミ箱")
+Vending.create(lat: 35.700875, lon: 139.772114, func: "ゴミ箱,IC")
+
+Drink.create(genre_id: 7, name: "ペプシコーラ")
+Drink.create(genre_id: 1, name: "やさしい麦茶")
+Drink.create(genre_id: 1, name: "お茶")
+Drink.create(genre_id: 6, name: "レモンスカッシュ")
