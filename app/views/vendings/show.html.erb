@@ -4,7 +4,7 @@
   <%= form_tag('/vendings/show', :method => :get) do %>
   <%= label_tag 'name' %><%= text_field_tag :name, params[:name] %>
   <%= label_tag 'genre' %>
-  <%= select_tag :genre, options_for_select(GenreList.all), include_blank: true %>
+  <%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル" %>
   <%= submit_tag ['検索'] %>
   <% end %>
   </div>
