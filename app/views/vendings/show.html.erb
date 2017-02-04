@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<%= render @drinks %>
 
 <html lang="ja">
   <head>
@@ -76,6 +75,12 @@
         <p/><%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル", :class => "form-control" %></p>
         <%= submit_tag("検索", :class => "btn btn-success" ) %>
         <% end %>
+
+        <table>
+          <tr>
+            <%= render @drinks %>
+          </tr>
+        </table>
       </div>
     </div>
 
