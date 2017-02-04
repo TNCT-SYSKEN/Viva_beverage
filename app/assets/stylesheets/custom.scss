@@ -3,7 +3,8 @@
 
 .sidebar{
   position: fixed;
-  color: #fff; /* 好みに応じて調節してください */
+  padding: 20px;
+  color: #555; /* 好みに応じて調節してください */
 }
 
   .sidebar.left {
@@ -12,5 +13,5 @@
     bottom: 0;
     width: 270px; /*この値は調節してください。*/
     box-shadow: 1px 0px 1px rgba(0,0,0,0.4);
-    background: #448AFF; /*背景色も好みに応じにて調節してください。*/
+    background: #ffff64; /*背景色も好みに応じにて調節してください。*/
   }
