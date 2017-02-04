@@ -2,10 +2,15 @@
 
 <%= render @drinks %>
 
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>検索結果</title>
+  </head>
+  <body>
     <p地図です。</p>
 
     <div id="map" style="width:1440px; height:700px"></div>
-
 
     <script type="text/javascript">
     function initMap() {
@@ -18,7 +23,14 @@
       var usrmarker = new google.maps.Marker( usrMarkerOptions )
       var usrMarkerOptions = new google.maps.Marker( {
         map: map ,	// 地図
-        position: new google.maps.LatLng(35.700088,139.77236420000003), content:'現在地'	// 現在地座標
+        position: new google.maps.LatLng(35.700088,139.77236420000003), // 現在地座標
+      } ) ;
+
+      var usrmakerinfo = new google.maps.InfoWindow( {
+        content: '<div class="sample">現在地</div>'
+      } ) ;
+      usrmaker.addListener('click', function() {
+        usrmakerinfo.open(map, usrmaker);
       } ) ;
       //for(venmakerid = 0; venmakerid < 50; venmakerid++) {    この部分はRailsからの受け取り方によって変動するので後回し
         //var venmaker [venmakerid] = new google.maps.Marker( VenMakerOptions )
