@@ -13,26 +13,26 @@ class VendingsController < ApplicationController
       drinks_t = Drink.where("name like '%" + user_params["name"] + "%' and genre_id =" + user_params["genre"])
       drinks_t.map{ |d| d.ve_relation_ship.map{ |r| @vendings.push(Vending.where(id: r.vending_id)) } }
 
-      @drinks.push(drinks)
+      @drinks.push(drinks_t)
 
     elsif !user_params["genre"].blank?
 
       drinks_t = Drink.where(genre_id: user_params["genre"])
       drinks_t.map{ |d| d.ve_relation_ship.map{ |r| @vendings.push(Vending.where(id: r.vending_id)) } }
 
-      @drinks.push(drinks)
+      @drinks.push(drinks_t)
 
     elsif !user_params["name"].blank?
 
       drinks_t = Drink.where("name like '%" + user_params["name"] + "%'")
       drinks_t.map{ |d| d.ve_relation_ship.map{ |r| @vendings.push(Vending.where(id: r.vending_id)) } }
 
-      @drinks.push(drinks)
+      @drinks.push(drinks_t)
 
     else
 
-      puts "hoge"
       @vendings.push(Vending.all)
+
     end
 
     @vendings = @vendings.flatten
