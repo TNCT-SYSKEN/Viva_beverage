@@ -8,11 +8,13 @@
     <title>検索結果</title>
   </head>
   <body>
-    <p地図です。</p>
+    <p>地図です。</p>
 
     <div id="map" style="width:1440px; height:700px"></div>
 
     <script type="text/javascript">
+    var vendings = JSON.parse('<%= raw @vendings.to_json %>');
+    document.write(vendings[0]["lat"]);
     function initMap() {
       var opts = {
         zoom: 20,
