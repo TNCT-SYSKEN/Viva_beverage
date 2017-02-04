@@ -25,29 +25,40 @@
       };
       var map = new google.maps.Map(document.getElementById("map"), opts);
 
-      var usrmarker = new google.maps.Marker( usrMarkerOptions )
-      var usrMarkerOptions = new google.maps.Marker( {
+      var usrMarker = new google.maps.Marker( {
         map: map ,	// 地図
         position: new google.maps.LatLng(35.700088,139.77236420000003), // 現在地座標
       } ) ;
 
-      var usrmarkerinfo = new google.maps.InfoWindow( {
+      var usrMarkerInfo = new google.maps.InfoWindow( {
         content: '<div class="sample">現在地</div>'
       } ) ;
-      usrmarker.addListener('click', function() {
-        usrmarkerinfo.open(map, usrmarker);
+      usrMarker.addListener('click', function() {
+        usrMarkerInfo.open(map, usrMarker);
       } ) ;
 
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(35.700889, 139.771905),
-        map: map
-      });
-
+      var venMarkers = [];
+      var venMarkerInfos = [];
       for(var i=0;i<vendings.length;++i) {
-        var marker = new google.maps.Marker({
+        var venMarker = new google.maps.Marker({
           position: new google.maps.LatLng(vendings[i]["lat"], vendings[i]["lon"]),
           map: map
         });
+        
+        venMarkers.push(venMarker);
+
+
+        /*
+        venMarkerInfos.push(venMarkerInfo = new google.maps.InfoWindow( {
+          content: '<div class="sample">ほげ</div>'
+        } ) );
+
+        venMarker.addListener('click', function() {
+          new google.maps.InfoWindow( {
+            content: '<div class="sample">ほげ</div>'
+          } ).open(map, venMarker);
+        } ) ;
+        */
       }
 
     }
