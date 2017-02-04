@@ -13,19 +13,52 @@
     <div id="map" style="width:100%; height:100vh"></div>
 
     <script type="text/javascript">
-    window.alert(gon.vendings.first.id)
+    var vendings = JSON.parse('<%= raw @vendings.to_json %>');
+    // document.write('<%= raw @vendings.to_json %>');
+
+    // document.write(vendings.length);
+
+    function attachMessage(marker, msg) {
+      google.maps.event.addListener(marker, 'click', function(event) {
+        new google.maps.InfoWindow({
+          content: '<div class="sample">' + msg + '</div>'
+        }).open(map, marker);
+      });
+    }
+
     function initMap() {
       var opts = {
         zoom: 20,
         center: new google.maps.LatLng(35.700088,139.77236420000003)
       };
+
       var map = new google.maps.Map(document.getElementById("map"), opts);
 
-      var usrmarker = new google.maps.Marker( usrMarkerOptions )
-      var usrMarkerOptions = new google.maps.Marker( {
+      var usrMarker = new google.maps.Marker( {
         map: map ,	// 地図
-        position: new google.maps.LatLng(35.700088,139.77236420000003) ,	// 位置座標
+        position: new google.maps.LatLng(35.700088,139.77236420000003), // 現在地座標
       } ) ;
+
+      var usrMarkerInfo = new google.maps.InfoWindow( {
+        content: '<div class="sample">現在地</div>'
+      } ) ;
+
+      usrMarker.addListener('click', function() {
+        usrMarkerInfo.open(map, usrMarker);
+      } ) ;
+
+      var venMarkers = [];
+      var venMarkerInfos = [];
+
+      for(var i=0;i<vendings.length;++i) {
+        var venMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(vendings[i]["lat"], vendings[i]["lon"]),
+          map: map
+        });
+
+        attachMessage(venMarker, "hoge");
+      }
+
     }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyB3n3YCJPGGDIZ2ybJdls6Xyn_pY2tywUc&callback=initMap"></script>

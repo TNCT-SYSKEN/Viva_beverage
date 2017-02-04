@@ -14,3 +14,9 @@ Drink.create(genre_id: 7, name: "ペプシコーラ")
 Drink.create(genre_id: 1, name: "やさしい麦茶")
 Drink.create(genre_id: 1, name: "お茶")
 Drink.create(genre_id: 6, name: "レモンスカッシュ")
+
+VeRelationShip.create(vending_id: 1, drink_id: 1, temp: -1, value: 100);
+VeRelationShip.create(vending_id: 1, drink_id: 2, temp: -1, value: 100);
+VeRelationShip.create(vending_id: 2, drink_id: 3, temp: -1, value: 120);
+VeRelationShip.create(vending_id: 2, drink_id: 4, temp: -1, value: 110);
+VeRelationShip.create(vending_id: 3, drink_id: 1, temp: -1, value: 110);
