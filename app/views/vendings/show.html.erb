@@ -10,10 +10,8 @@
     <div id="map" style="width:100%; height:100vh"></div>
 
     <script type="text/javascript">
-    var vendings = JSON.parse('<%= raw @vendings.to_json %>');
-    // document.write('<%= raw @vendings.to_json %>');
 
-    // document.write(vendings.length);
+    var vendings = JSON.parse('<%= raw @vendings.to_json %>');
 
     function attachMessage(marker, msg) {
       google.maps.event.addListener(marker, 'click', function(event) {
@@ -66,12 +64,12 @@
     <div class="sidebar left">
       <div>
         <a href="#"  data-action="close" data-side="left" class="btn"><img style="margin: -20px 0px 0px 180px; width: 40px; height: 40px;" src="/assets/left.png"></a>
-        <p><%= form_tag('/vendings/show', :method => :get) do %></p>
+        <p><%= form_tag('/vendings/show', {:method => :get}) do %></p>
         <p><%= label_tag '名前' %>
         <!-- <%= text_field_tag :name, params[:name], :class => "form-control", placeholder: "入力してください" %></p> -->
-        <%= text_field_tag :name, @word, placeholder: "例：コカ・コーラ", class: "form-control input-search-word" %></p>
+        <%= text_field_tag :name, @word, placeholder: "例：コカ・コーラ", class: "form-control input-search-word" , id: "name"%></p>
         <label for="name">ジャンル</label>
-        <p><%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル", :class => "form-control" %></p>
+        <p><%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル", :class => "form-control", :id => "genre" %></p>
         <%= submit_tag("検索", :class => "btn btn-success" ) %>
         <% end %>
 
@@ -86,6 +84,29 @@
 </html>
 
 <script>
+var getUrlVars = function(){
+    var vars = {};
+    var param = location.search.substring(1).split('&');
+    for(var i = 0; i < param.length; i++) {
+        var keySearch = param[i].search(/=/);
+        var key = '';
+        if(keySearch != -1) key = param[i].slice(0, keySearch);
+        var val = param[i].slice(param[i].indexOf('=', 0) + 1);
+        if(key != '') vars[key] = decodeURI(val);
+    }
+    return vars;
+}
+
+
+
+pulldown_option = document.getElementById("genre").getElementsByTagName('option');
+  for(i=0; i<pulldown_option.length;i++){
+    if(pulldown_option[i].value == getUrlVars()["genre"]){
+    pulldown_option[i].selected = true;
+    break;
+  }
+}
+
 $(document).ready(function () {
     // 向き
     var sides = ["left", "top", "right", "bottom"];
@@ -108,11 +129,18 @@ $(document).ready(function () {
 </script>
 
 <script type="text/javascript">
+function FormSubmit() {
+  var target = document.getElementById("form01");
+  target.method = "get";
+  target.submit();
+}
+
 $(function(){
     $('#drink li').click(function(){
         var index = $(this).index() + 1;
         var text = $(this).text();
-        alert('要素:' + index + '番目' + text);
+
+        document.getElementById("name").defaultValue = text.trim();
     });
 });
 </script>
