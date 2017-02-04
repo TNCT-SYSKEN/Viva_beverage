@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20170204041747) do
   end
 
   create_table "ve_relation_ships", force: :cascade do |t|
-    t.integer  "ven_id"
-    t.integer  "dri_id"
+    t.integer  "vending_id"
+    t.integer  "drink_id"
     t.integer  "temp"
     t.integer  "value"
     t.datetime "created_at", null: false
