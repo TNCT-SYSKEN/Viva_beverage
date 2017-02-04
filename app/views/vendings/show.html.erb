@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<h1>検索結果</h1>
 
   <div>
   <%= form_tag('/vendings/show', :method => :get) do %>
@@ -10,9 +9,10 @@
   <% end %>
   </div>
 
-  <%= @vendings %>
 
-<p>検索画面</p>
+<h1>検索結果</h1>
+
+<%= render @drinks %>
 
 地図
 
@@ -27,6 +27,7 @@
     <div id="map" style="width:1440px; height:700px"></div>
 
     <script type="text/javascript">
+    window.alert(gon.vendings.first.id)
     function initMap() {
       var opts = {
         zoom: 20,
