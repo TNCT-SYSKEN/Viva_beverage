@@ -19,3 +19,12 @@
 ul {
   list-style-type: none;
  }
+
+ul li { padding: 0; margin: 10px 0px; }
+ul a { padding: 5px; display: block; }
+
+li:hover{
+ background-color: #e1e100;
+ color: #ff0000;
+ cursor: pointer;
+}

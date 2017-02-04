@@ -232,4 +232,3 @@ VeRelationShip.create(vending_id: 2, drink_id: 53, temp: 1, value: 120);
 VeRelationShip.create(vending_id: 2, drink_id: 55, temp: 1, value: 120);
 VeRelationShip.create(vending_id: 2, drink_id: 56, temp: 1, value: 110);
 VeRelationShip.create(vending_id: 2, drink_id: 57, temp: 1, value: 100);
-

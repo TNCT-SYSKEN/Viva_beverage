@@ -76,7 +76,7 @@
         <%= submit_tag("検索", :class => "btn btn-success" ) %>
         <% end %>
 
-        <ul>
+        <ul id="drink">
           <%= render @drinks %>
         </ul>
       </div>
@@ -104,6 +104,16 @@ $(document).ready(function () {
         var side = $this.attr("data-side");
         $(".sidebar." + side).trigger("sidebar:" + action);
         return false;
+    });
+});
+</script>
+
+<script type="text/javascript">
+$(function(){
+    $('#drink li').click(function(){
+        var index = $(this).index() + 1;
+        var text = $(this).text();
+        // alert('要素:' + index + '番目' + text);
     });
 });
 </script>
