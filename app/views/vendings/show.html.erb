@@ -65,13 +65,12 @@
       var venMarkerInfos = [];
 
       for(var i=0;i<vendings.length;++i) {
-        alert(i);
         var venMarker = new google.maps.Marker({
           position: new google.maps.LatLng(vendings[i]["lat"], vendings[i]["lon"]),
           map: map
         });
 
-        
+
         attachMessage(venMarker, vendings[i]["func"], relations[i], v_drinks[i]);
       }
     }

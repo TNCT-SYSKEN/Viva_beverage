@@ -48,7 +48,6 @@ class VendingsController < ApplicationController
     i = 0
 
     @vendings.map{|v|
-      puts i
       @v_drinks[i] = []
       v.ve_relation_ship.map{|r|
         @v_drinks[i].push(Drink.where(id: r.drink_id)[0].name)
@@ -56,9 +55,6 @@ class VendingsController < ApplicationController
       }
       i += 1
     }
-
-    p @v_drinks[1]
-    #p @v_drinks[1]
 
     @drinks = @drinks.flatten.uniq
     @relations = @relations.flatten.uniq
