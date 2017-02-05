@@ -12,8 +12,9 @@
     <script type="text/javascript">
 
     var vendings = JSON.parse('<%= raw @vendings.to_json %>');
+    var relations = JSON.parse('<%= raw @relations.to_json %>');
 
-    function attachMessage(marker, msg) {
+    function attachMessage(marker, msg, rel, id) {
       funcAr = msg.split(',');
       htc = "";
       for(var n = 0;n < funcAr.length;++n){
@@ -27,7 +28,7 @@
       }
       google.maps.event.addListener(marker, 'click', function(event) {
         new google.maps.InfoWindow({
-          content: '<div class="sample">' + htc + '</div>'
+          content: '<div class="sample">' + htc + '</div><div>' + rel + '</div>'
         }).open(map, marker);
       });
     }
@@ -62,7 +63,7 @@
           map: map
         });
 
-        attachMessage(venMarker, vendings[i]["func"]);
+        attachMessage(venMarker, vendings[i]["func"], relations[i], i);
       }
     }
 
