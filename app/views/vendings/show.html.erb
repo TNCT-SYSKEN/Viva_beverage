@@ -92,6 +92,8 @@
         <%= text_field_tag :name, @word, placeholder: "例：コカ・コーラ", class: "form-control input-search-word" , id: "name"%></p>
         <label for="name">ジャンル</label>
         <p><%= select_tag :genre, options_for_select(GenreList.all.map {|g| [g.name, g.id]}), :prompt => "ジャンル", :class => "form-control", :id => "genre" %></p>
+        <label for="name">温度</label>
+        <p><%= select_tag :temp, options_for_select([["COLD", -1], ["HOT", 1]]), :prompt => "指定しない", :class => "form-control", :id => "temp" %></p>
         <%= submit_tag("検索", :class => "btn btn-success" ) %>
         <% end %>
 
