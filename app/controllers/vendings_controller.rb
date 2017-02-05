@@ -41,11 +41,28 @@ class VendingsController < ApplicationController
 
     end
 
-    @vendings = @vendings.flatten
-    @drinks = @drinks.flatten
-    @relations = @relations.flatten
+    @vendings = @vendings.flatten.uniq
 
-    puts @relations[1]
+    @v_drinks = []
+
+    i = 0
+
+    @vendings.map{|v|
+      puts i
+      @v_drinks[i] = []
+      v.ve_relation_ship.map{|r|
+        @v_drinks[i].push(Drink.where(id: r.drink_id)[0].name)
+        @v_drinks[i] = @v_drinks[i].flatten.uniq
+      }
+      i += 1
+    }
+
+    p @v_drinks[1]
+    #p @v_drinks[1]
+
+    @drinks = @drinks.flatten.uniq
+    @relations = @relations.flatten.uniq
+
   end
 
   private

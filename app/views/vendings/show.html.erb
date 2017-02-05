@@ -12,11 +12,12 @@
     <script type="text/javascript">
 
     var vendings = JSON.parse('<%= raw @vendings.to_json %>');
+    var v_drinks = JSON.parse('<%= raw @v_drinks.to_json %>');
     var relations = JSON.parse('<%= raw @relations.to_json %>');
 
-    function attachMessage(marker, msg, rel, id) {
-      funcAr = msg.split(',');
-      htc = "";
+    function attachMessage(marker, msg, rel, vd) {
+      var funcAr = msg.split(',');
+      var htc = "";
       for(var n = 0;n < funcAr.length;++n){
         if(funcAr[n] == "AED"){
           htc = htc + '<%= image_tag "AED.png", :width => 30, :height => 30 %>';
@@ -26,9 +27,15 @@
           htc = htc + '<%= image_tag "IC.png", :width => 30, :height => 30 %>';
         }
       }
+
       google.maps.event.addListener(marker, 'click', function(event) {
+        var vs = "";
+        for(var j = 0;j < vd.length;++j){
+          vs += "</br>" + vd[j];
+        }
+
         new google.maps.InfoWindow({
-          content: '<div class="sample">' + htc + '</div><div>' + rel + '</div>'
+          content: '<div class="sample">' + htc + '</div><div>' + vs + '</div>'
         }).open(map, marker);
       });
     }
@@ -58,12 +65,14 @@
       var venMarkerInfos = [];
 
       for(var i=0;i<vendings.length;++i) {
+        alert(i);
         var venMarker = new google.maps.Marker({
           position: new google.maps.LatLng(vendings[i]["lat"], vendings[i]["lon"]),
           map: map
         });
 
-        attachMessage(venMarker, vendings[i]["func"], relations[i], i);
+        
+        attachMessage(venMarker, vendings[i]["func"], relations[i], v_drinks[i]);
       }
     }
 
@@ -141,11 +150,6 @@ $(document).ready(function () {
 </script>
 
 <script type="text/javascript">
-function FormSubmit() {
-  var target = document.getElementById("form01");
-  target.method = "get";
-  target.submit();
-}
 
 $(function(){
     $('#drink li').click(function(){
